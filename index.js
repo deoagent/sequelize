@@ -62,9 +62,25 @@ User.sync({ alter: true }).then(() =>{
     //     attributes: ['username',
     //                 [sequelize.fn('SUM', sequelize.col('age')), 'sum_age']],
     //     group: 'username'});
-    return User.findAll({ where: {
-        [Op.or]: { username: 'soccer', age: 45 }
-    }});
+    // return User.findAll({ where: {
+    //     [Op.or]: { username: 'soccer', age: 45 }
+    // }});
+    // return User.findAll({ where: {
+    //     age: {
+    //         [Op.gt]: 25
+    //     }
+    // }});
+    // return User.findAll({ where: {
+    //     age: {
+    //         [Op.or]: {
+    //             [Op.lt]: 45,
+    //             [Op.eq]: null
+    //         }
+    //     }
+    // }});
+    return User.findAll({ where: 
+        sequelize.where(sequelize.fn('char_length', sequelize.col('username')), 6)
+    });
 })
 .then((data) =>{
     data.forEach(element => {
