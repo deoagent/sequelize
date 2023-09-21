@@ -23,7 +23,10 @@ const User = sequelize.define('user', {
     },
     username: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: [4, 6]
+        }
     },
     password: {
         type: DataTypes.STRING
@@ -45,12 +48,26 @@ const User = sequelize.define('user', {
 // User.sync({ force: true });
 User.sync({ alter: true }).then(() =>{
     //Working with our updated table
-    return User.create({
-        username: 'WittCode',
-        // password: 'subscribe',
-        // age: 25,
-        // WittCodeRocks: false
+    return User.bulkCreate([
+        {
+            username: 'Tomfsdfdsfsd',
+            age: 25,
+            password: 'pizzasoccer'
+        },
+        {
+            username: 'Mikesdfdsfsdf',
+            age: 31,
+            password: '12345'
+        },
+        {
+            username: 'F'
+        }
+    ], {
+        validate: true
     });
+    // return User.create({
+    //     username: 'Freddiertyrhrr'
+    // });
     // const user = User.build({ username: 'WittCode', password: '123', age: 25, WittCodeRocks: true });
     // user.username = 'soccer';
     // return user.save();
@@ -64,7 +81,10 @@ User.sync({ alter: true }).then(() =>{
     // return data.save();
     // return data.destroy();
     // data.decrement({ age: 2 })
-    console.log(data.toJSON());
+    // console.log(data.toJSON());
+    data.forEach(element => {
+        console.log(element.toJSON());
+    });
 
 })
 // .then((data) =>{
