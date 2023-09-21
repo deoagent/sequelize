@@ -48,44 +48,26 @@ const User = sequelize.define('user', {
 // User.sync({ force: true });
 User.sync({ alter: true }).then(() =>{
     //Working with our updated table
-    // return User.findAll();
-    // return User.findAll({ attributes: ['username', 'password'] });
-    // return User.findAll({ attributes: [['username', 'myName'],['password', 'pwd'] ]});
-    // return User.findAll({ attributes: [[sequelize.fn('SUM', sequelize.col('age')), 'howOld']]});
-    // return User.findAll({ attributes: { exclude: ['password'] }});
-    // return User.findAll({ where: { age:45 } });
-    // return User.findAll({ attributes: ['username'], where: { age:45 } });
-    // return User.findAll({ where: { age:25, username: 'soccer'} });
-    // return User.findAll({ limit: 2 });
-    // return User.findAll({ order: [['age', 'DESC']] });
-    // return User.findAll({
-    //     attributes: ['username',
-    //                 [sequelize.fn('SUM', sequelize.col('age')), 'sum_age']],
-    //     group: 'username'});
-    // return User.findAll({ where: {
-    //     [Op.or]: { username: 'soccer', age: 45 }
-    // }});
-    // return User.findAll({ where: {
-    //     age: {
-    //         [Op.gt]: 25
-    //     }
-    // }});
-    // return User.findAll({ where: {
-    //     age: {
-    //         [Op.or]: {
-    //             [Op.lt]: 45,
-    //             [Op.eq]: null
-    //         }
-    //     }
-    // }});
-    return User.findAll({ where: 
-        sequelize.where(sequelize.fn('char_length', sequelize.col('username')), 6)
-    });
+    // return User.update({ username: 'pizza' }, {
+    //     where: {age: 25}
+    // });
+    // return User.update({ username: 'Yes!' }, {
+    //     where: {age: {
+    //         [Op.gt]: 1
+    //     }}
+    // });
+    // return User.destroy({ where: { username: 'Yes!' }});
+    // return User.create({ 
+    //     username: 'oldy',
+    //     password: '12345',
+    //     age: 87
+    // });
+    // return User.max('age');
+    // return User.sum('age');
+    return User.max('age', { where: {age: 25} });
 })
 .then((data) =>{
-    data.forEach(element => {
-        console.log(element.toJSON());
-    });
+    console.log(data);
 })
 
 .catch((err) => {
