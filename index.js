@@ -65,32 +65,16 @@ User.sync({ alter: true }).then(() =>{
     ], {
         validate: true
     });
-    // return User.create({
-    //     username: 'Freddiertyrhrr'
-    // });
-    // const user = User.build({ username: 'WittCode', password: '123', age: 25, WittCodeRocks: true });
-    // user.username = 'soccer';
-    // return user.save();
+
 })
 .then((data) =>{
-    // console.log('User added to database');
-    // data.username = 'pizza';
-    // data.age = 45;
-    // return data.save({ fields: ['age'] });
-    // return data.reload();
-    // return data.save();
-    // return data.destroy();
-    // data.decrement({ age: 2 })
-    // console.log(data.toJSON());
+  
     data.forEach(element => {
         console.log(element.toJSON());
     });
 
 })
-// .then((data) =>{
-//     console.log('User updated!');
-//     console.log(data.toJSON());
-// })
+
 .catch((err) => {
     console.log(err);
 })
